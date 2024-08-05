@@ -9,7 +9,7 @@ func TestGenerateRandomPath(t *testing.T) {
 	for i := 1; i < PATH_MAX; i++ {
 		for _, prefix := range []string{"", "/tmp", "a"} {
 			for _, suffix := range []string{"", "exe", "b"} {
-				got, err := Generate(prefix, suffix, i)
+				got, err := Generate(prefix, suffix, i, true)
 				if err != nil {
 					t.Log(err)
 					continue

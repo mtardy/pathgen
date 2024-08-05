@@ -21,6 +21,7 @@ func main() {
 	write := flag.Bool("w", false, "write the filepath on the filesystem")
 	cleanup := flag.Bool("c", false, fmt.Sprintf("cleanup everything under %q", defaultPrefix))
 	symlink := flag.Bool("l", true, fmt.Sprintf("create a symlink at \"%s/exe\" to the target file, used when write is enabled", defaultPrefix))
+	random := flag.Bool("r", false, "generate a random string for the path")
 	prefix := flag.String("p", defaultPrefix, "prefix for the random path, you will need to cleanup manually")
 	binary := flag.String("b", "", "binary to put at the end of the random path, used when write is enabled")
 	suffix := flag.String("s", defaultSuffix, "suffix of the random path, name of the copied binary")
@@ -57,7 +58,7 @@ Flags:
 	if prefix == nil || suffix == nil {
 		panic("prefix or prefix is nil")
 	}
-	targetPath, err := randpath.Generate(*prefix, *suffix, targetLength)
+	targetPath, err := randpath.Generate(*prefix, *suffix, targetLength, *random)
 	if err != nil {
 		panic(err)
 	}

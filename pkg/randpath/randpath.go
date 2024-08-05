@@ -11,7 +11,14 @@ const (
 	PATH_MAX = 4096
 )
 
-func Generate(prefix, suffix string, length int) (string, error) {
+func selectChar(random bool) byte {
+	if random {
+		return byte('a' + rand.Intn('z'-'a'+1))
+	}
+	return 'a'
+}
+
+func Generate(prefix, suffix string, length int, random bool) (string, error) {
 	if length == 0 {
 		return "", nil
 	}
@@ -39,7 +46,7 @@ func Generate(prefix, suffix string, length int) (string, error) {
 			char = '/'
 			randomSectionLength = 0
 		} else {
-			char = byte('a' + rand.Intn('z'-'a'+1))
+			char = selectChar(random)
 			randomSectionLength++
 		}
 		randomPart = append(randomPart, char)
@@ -48,7 +55,7 @@ func Generate(prefix, suffix string, length int) (string, error) {
 	if len(randomPart) > 2 {
 		if randomPart[len(randomPart)-1] == '/' {
 			randomPart[len(randomPart)-2] = '/'
-			randomPart[len(randomPart)-1] = byte('a' + rand.Intn('z'-'a'+1))
+			randomPart[len(randomPart)-1] = selectChar(random)
 		}
 	}
 
