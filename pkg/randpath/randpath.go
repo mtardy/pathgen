@@ -18,7 +18,7 @@ func selectChar(random bool) byte {
 	return 'a'
 }
 
-func Generate(prefix, suffix string, length int, random bool) (string, error) {
+func Generate(prefix, suffix string, length int, random bool, dirMaxLen int) (string, error) {
 	if length == 0 {
 		return "", nil
 	}
@@ -42,7 +42,7 @@ func Generate(prefix, suffix string, length int, random bool) (string, error) {
 	randomPart := make([]byte, 0, PATH_MAX)
 	for currentLength, randomSectionLength := 0, 0; currentLength < length-slashBeforeSuffix; currentLength = len(randomPart) + len(starterPath) {
 		var char byte
-		if randomSectionLength != 0 && randomSectionLength%NAME_MAX == 0 {
+		if randomSectionLength != 0 && randomSectionLength%dirMaxLen == 0 {
 			char = '/'
 			randomSectionLength = 0
 		} else {

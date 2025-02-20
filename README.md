@@ -21,9 +21,12 @@ Flags:
   -b string
         binary to put at the end of the random path, used when write is enabled
   -c    cleanup everything under "/tmp/pathgen"
+  -d int
+        maximum length of a directory name (default 255)
   -l    create a symlink at "/tmp/pathgen/exe" to the target file, used when write is enabled (default true)
   -p string
         prefix for the random path, you will need to cleanup manually (default "/tmp/pathgen")
+  -r    generate a random string for the path
   -s string
         suffix of the random path, name of the copied binary (default "bin")
   -w    write the filepath on the filesystem

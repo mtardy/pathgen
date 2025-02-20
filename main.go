@@ -25,6 +25,7 @@ func main() {
 	prefix := flag.String("p", defaultPrefix, "prefix for the random path, you will need to cleanup manually")
 	binary := flag.String("b", "", "binary to put at the end of the random path, used when write is enabled")
 	suffix := flag.String("s", defaultSuffix, "suffix of the random path, name of the copied binary")
+	dirMaxLen := flag.Int("d", randpath.NAME_MAX, "maximum length of a directory name")
 	flag.Parse()
 	args := flag.Args()
 
@@ -58,7 +59,7 @@ Flags:
 	if prefix == nil || suffix == nil {
 		panic("prefix or prefix is nil")
 	}
-	targetPath, err := randpath.Generate(*prefix, *suffix, targetLength, *random)
+	targetPath, err := randpath.Generate(*prefix, *suffix, targetLength, *random, *dirMaxLen)
 	if err != nil {
 		panic(err)
 	}
